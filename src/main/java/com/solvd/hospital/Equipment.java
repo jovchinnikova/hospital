@@ -2,17 +2,17 @@ package com.solvd.hospital;
 
 public class Equipment {
 
-    private long id;
+    private Long id;
     private String name;
     private double price;
     private int quantity;
     private Supplier supplier;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

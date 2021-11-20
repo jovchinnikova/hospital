@@ -2,15 +2,15 @@ package com.solvd.hospital;
 
 public abstract class Person {
 
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -22,11 +22,11 @@ public abstract class Person {
         this.firstName = firstName;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String LastName){
+    public void setLastName(String LastName) {
         this.lastName = lastName;
     }
 }

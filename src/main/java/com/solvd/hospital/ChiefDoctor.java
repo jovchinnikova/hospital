@@ -1,4 +1,4 @@
 package com.solvd.hospital;
 
-public class ChiefDoctor extends Person{
+public class ChiefDoctor extends Person {
 }

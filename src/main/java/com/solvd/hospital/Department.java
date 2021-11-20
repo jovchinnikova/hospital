@@ -4,18 +4,19 @@ import java.util.List;
 
 public class Department {
 
-    private long id;
+    private Long id;
     private String title;
     private DepartmentHead departmentHead;
-    private Hospital hospital;
+    private List<Worker> workers;
+    private List<Patient> patients;
     private List<Equipment> equipmentList;
     private List<Medication> medications;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -35,12 +36,20 @@ public class Department {
         this.departmentHead = departmentHead;
     }
 
-    public Hospital getHospital() {
-        return hospital;
+    public List<Worker> getWorkers() {
+        return workers;
     }
 
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+    public void setWorkers(List<Worker> workers) {
+        this.workers = workers;
+    }
+
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
     }
 
     public List<Equipment> getEquipmentList() {

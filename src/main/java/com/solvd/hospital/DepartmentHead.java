@@ -1,6 +1,6 @@
 package com.solvd.hospital;
 
-public class DepartmentHead extends Person{
+public class DepartmentHead extends Person {
 
     private int qualification;
 
