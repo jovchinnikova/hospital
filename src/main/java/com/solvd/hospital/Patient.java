@@ -2,8 +2,16 @@ package com.solvd.hospital;
 
 public class Patient extends Person {
 
+    private Integer age;
     private String diagnosis;
-    private int ward;
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
     public String getDiagnosis() {
         return diagnosis;
@@ -11,13 +19,5 @@ public class Patient extends Person {
 
     public void setDiagnosis(String diagnosis) {
         this.diagnosis = diagnosis;
-    }
-
-    public int getWard() {
-        return ward;
-    }
-
-    public void setWard(int ward) {
-        this.ward = ward;
     }
 }

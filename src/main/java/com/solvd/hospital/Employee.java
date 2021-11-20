@@ -1,15 +1,24 @@
 package com.solvd.hospital;
 
-public class Worker extends Person {
+public class Employee extends Person {
 
-    private int qualification;
+    private String position;
+    private Integer qualification;
     private Specialization specialization;
 
-    public int getQualification() {
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public Integer getQualification() {
         return qualification;
     }
 
-    public void setQualification(int qualification) {
+    public void setQualification(Integer qualification) {
         this.qualification = qualification;
     }
 

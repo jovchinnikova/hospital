@@ -4,7 +4,7 @@ public class Specialization {
 
     private Long id;
     private String name;
-    private String salary;
+    private double salary;
 
     public Long getId() {
         return id;
@@ -22,11 +22,11 @@ public class Specialization {
         this.name = name;
     }
 
-    public String getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 }

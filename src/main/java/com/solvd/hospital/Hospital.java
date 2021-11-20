@@ -6,10 +6,10 @@ public class Hospital {
 
     private Long id;
     private String title;
-    private ChiefDoctor chiefDoctor;
+    private Employee chiefDoctor;
     private List<Department> departments;
-    private String address;
-    private int phoneNumber;
+    private Address address;
+    private Integer phoneNumber;
 
     public Long getId() {
         return id;
@@ -27,12 +27,14 @@ public class Hospital {
         this.title = title;
     }
 
-    public ChiefDoctor getChiefDoctor() {
+    public Employee getChiefDoctor(){
         return chiefDoctor;
     }
 
-    public void setChiefDoctor(ChiefDoctor chiefDoctor) {
-        this.chiefDoctor = chiefDoctor;
+    public void setChiefDoctor(Employee employee){
+        if (employee.getPosition().equals("chief doctor")){
+            chiefDoctor = employee;
+        }
     }
 
     public List<Department> getDepartments() {
@@ -43,19 +45,19 @@ public class Hospital {
         this.departments = departments;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public Integer getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

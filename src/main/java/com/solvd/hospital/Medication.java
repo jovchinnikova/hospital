@@ -5,7 +5,7 @@ public class Medication {
     private Long id;
     private String name;
     private String form;
-    private double dosage;
+    private Double dosage;
     private double price;
     private int quantity;
     private Supplier supplier;

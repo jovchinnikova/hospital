@@ -6,10 +6,10 @@ public class Department {
 
     private Long id;
     private String title;
-    private DepartmentHead departmentHead;
-    private List<Worker> workers;
-    private List<Patient> patients;
-    private List<Equipment> equipmentList;
+    private Employee departmentHead;
+    private List<Employee> employees;
+    private List<Ward> wards;
+    private List<Equipment> equipments;
     private List<Medication> medications;
 
     public Long getId() {
@@ -28,36 +28,38 @@ public class Department {
         this.title = title;
     }
 
-    public DepartmentHead getDepartmentHead() {
+    public Employee getDepartmentHead(){
         return departmentHead;
     }
 
-    public void setDepartmentHead(DepartmentHead departmentHead) {
-        this.departmentHead = departmentHead;
+    public void setDepartmentHead(Employee employee){
+        if(employee.getPosition().equals("head of department")){
+            departmentHead = employee;
+        }
     }
 
-    public List<Worker> getWorkers() {
-        return workers;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setWorkers(List<Worker> workers) {
-        this.workers = workers;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
-    public List<Patient> getPatients() {
-        return patients;
+    public List<Ward> getWards() {
+        return wards;
     }
 
-    public void setPatients(List<Patient> patients) {
-        this.patients = patients;
+    public void setWards(List<Ward> wards) {
+        this.wards = wards;
     }
 
-    public List<Equipment> getEquipmentList() {
-        return equipmentList;
+    public List<Equipment> getEquipments() {
+        return equipments;
     }
 
-    public void setEquipmentList(List<Equipment> equipmentList) {
-        this.equipmentList = equipmentList;
+    public void setEquipments(List<Equipment> equipmentList) {
+        this.equipments = equipmentList;
     }
 
     public List<Medication> getMedications() {
