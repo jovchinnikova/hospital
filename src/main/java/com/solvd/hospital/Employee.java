@@ -2,15 +2,30 @@ package com.solvd.hospital;
 
 public class Employee extends Person {
 
-    private String position;
+    private Position position;
     private Integer qualification;
     private Specialization specialization;
 
-    public String getPosition() {
+    public enum Position {
+
+        CHIEF_DOCTOR("chief doctor"), DEPARTMENT_HEAD("head of department");
+
+        private final String name;
+
+        Position(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 

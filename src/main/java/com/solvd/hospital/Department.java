@@ -28,12 +28,12 @@ public class Department {
         this.title = title;
     }
 
-    public Employee getDepartmentHead(){
+    public Employee getDepartmentHead() {
         return departmentHead;
     }
 
-    public void setDepartmentHead(Employee employee){
-        if(employee.getPosition().equals("head of department")){
+    public void setDepartmentHead(Employee employee) {
+        if (Employee.Position.DEPARTMENT_HEAD.equals(employee.getPosition())) {
             departmentHead = employee;
         }
     }

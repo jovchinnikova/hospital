@@ -27,12 +27,12 @@ public class Hospital {
         this.title = title;
     }
 
-    public Employee getChiefDoctor(){
+    public Employee getChiefDoctor() {
         return chiefDoctor;
     }
 
-    public void setChiefDoctor(Employee employee){
-        if (employee.getPosition().equals("chief doctor")){
+    public void setChiefDoctor(Employee employee) {
+        if (Employee.Position.CHIEF_DOCTOR.equals(employee.getPosition())) {
             chiefDoctor = employee;
         }
     }
