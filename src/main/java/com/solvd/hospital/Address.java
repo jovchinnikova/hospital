@@ -5,7 +5,7 @@ public class Address {
     private Long id;
     private String city;
     private String street;
-    private Integer buildingNumber;
+    private String buildingNumber;
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class Address {
         this.street = street;
     }
 
-    public Integer getBuildingNumber() {
+    public String getBuildingNumber() {
         return buildingNumber;
     }
 
-    public void setBuildingNumber(Integer buildingNumber) {
+    public void setBuildingNumber(String buildingNumber) {
         this.buildingNumber = buildingNumber;
     }
 }
