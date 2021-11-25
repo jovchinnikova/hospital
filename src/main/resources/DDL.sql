@@ -11,7 +11,7 @@ primary key(id)
 create table if not exists Equipments(
 id serial,
 name varchar(45) not null,
-price double unsigned,
+price decimal(5,1) unsigned,
 primary key(id)
 );
 
@@ -31,7 +31,7 @@ id serial,
 name varchar(45) not null unique,
 form varchar(45) not null,
 dosage double unsigned,
-price double unsigned,
+price decimal(5,1) unsigned,
 primary key(id)
 );
 
@@ -57,7 +57,7 @@ primary key(id)
 create table if not exists Specializations(
 id serial,
 name varchar(45) not null unique,
-salary double unsigned not null,
+salary decimal(5,1) unsigned not null,
 primary key(id)
 );
 
@@ -136,7 +136,6 @@ on update no action on delete cascade,
 constraint fk_Department_equipments_equipment_id foreign key(equipment_id) references Equipments(id)
 on update no action on delete cascade
 );
-
 
 create table if not exists Department_medications(
 id serial,

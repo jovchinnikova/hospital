@@ -1,10 +1,12 @@
 package com.solvd.hospital;
 
+import java.math.BigDecimal;
+
 public class Equipment {
 
     private Long id;
     private String name;
-    private double price;
+    private BigDecimal price;
     private int quantity;
     private Supplier supplier;
 
@@ -24,11 +26,11 @@ public class Equipment {
         this.name = name;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
