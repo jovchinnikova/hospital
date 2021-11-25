@@ -1,10 +1,12 @@
 package com.solvd.hospital;
 
+import java.math.BigDecimal;
+
 public class Specialization {
 
     private Long id;
     private String name;
-    private double salary;
+    private BigDecimal salary;
 
     public Long getId() {
         return id;
@@ -22,11 +24,11 @@ public class Specialization {
         this.name = name;
     }
 
-    public double getSalary() {
+    public BigDecimal getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(BigDecimal salary) {
         this.salary = salary;
     }
 }
