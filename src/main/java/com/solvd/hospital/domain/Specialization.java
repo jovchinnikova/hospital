@@ -1,10 +1,12 @@
-package com.solvd.hospital;
+package com.solvd.hospital.domain;
 
-public class Supplier {
+import java.math.BigDecimal;
+
+public class Specialization {
 
     private Long id;
     private String name;
-    private String country;
+    private BigDecimal salary;
 
     public Long getId() {
         return id;
@@ -22,11 +24,11 @@ public class Supplier {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
+    public BigDecimal getSalary() {
+        return salary;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
     }
 }
