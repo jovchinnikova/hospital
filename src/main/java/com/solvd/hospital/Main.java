@@ -1,6 +1,10 @@
 package com.solvd.hospital;
 
 import com.solvd.hospital.domain.*;
+import com.solvd.hospital.persistence.DepartmentRepository;
+import com.solvd.hospital.persistence.SupplierRepository;
+import com.solvd.hospital.persistence.impl.DepartmentRepositoryImpl;
+import com.solvd.hospital.persistence.impl.SupplierRepositoryImpl;
 import com.solvd.hospital.service.HospitalService;
 import com.solvd.hospital.service.impl.HospitalServiceImpl;
 
@@ -154,5 +158,13 @@ public class Main {
 
         HospitalService hospitalService = new HospitalServiceImpl();
         hospitalService.create(hospital);
+
+        SupplierRepository supplierRepository = new SupplierRepositoryImpl();
+        supplierRepository.delete(supplier1.getName());
+        supplierRepository.update(supplier2,"China");
+
+        DepartmentRepository departmentRepository = new DepartmentRepositoryImpl();
+        List<Department> result = departmentRepository.getAll();
+        System.out.println(result);
     }
 }

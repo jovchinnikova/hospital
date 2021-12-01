@@ -7,6 +7,10 @@ import com.solvd.hospital.persistence.impl.PatientRepositoryImpl;
 import com.solvd.hospital.persistence.impl.WardRepositoryImpl;
 import com.solvd.hospital.service.WardService;
 
+import java.lang.reflect.Array;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class WardServiceImpl implements WardService {
 
     private final WardRepository wardRepository = new WardRepositoryImpl();
@@ -20,5 +24,14 @@ public class WardServiceImpl implements WardService {
             ward.getPatients().stream()
                     .forEach(patient -> patientRepository.create(patient, ward.getId()));
         }
+    }
+
+    @Override
+    public List<Ward> getById(Long departmentId){
+        List<Ward> wards = wardRepository.getById(departmentId);
+        wards = wards.stream()
+                .distinct()
+                .collect(Collectors.toList());
+        return wards;
     }
 }

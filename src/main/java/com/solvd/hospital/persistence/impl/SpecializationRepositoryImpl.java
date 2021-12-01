@@ -6,8 +6,6 @@ import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.SpecializationRepository;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class SpecializationRepositoryImpl implements SpecializationRepository {
@@ -33,30 +31,6 @@ public class SpecializationRepositoryImpl implements SpecializationRepository {
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }
-    }
-
-    @Override
-    public List<Specialization> getAll() {
-        Connection connection = CONNECTION_POOL.getConnection();
-        String select = "select * from specializations";
-        List<Specialization> specializations = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(select);
-            preparedStatement.executeQuery();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            while (resultSet.next()) {
-                Specialization specialization = new Specialization();
-                specialization.setId(resultSet.getLong("id"));
-                specialization.setName(resultSet.getString("name"));
-                specialization.setSalary(resultSet.getBigDecimal("salary"));
-                specializations.add(specialization);
-            }
-        } catch (SQLException e) {
-            throw new ProcessingException("Can't select specializations " + e.getMessage());
-        } finally {
-            CONNECTION_POOL.releaseConnection(connection);
-        }
-        return specializations;
     }
 
     @Override

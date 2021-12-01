@@ -69,4 +69,13 @@ public class Department {
     public void setMedications(List<Medication> medications) {
         this.medications = medications;
     }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                " id=" + id +
+                ", title='" + title + '\'' +
+                ", wards=" + wards +
+                '}';
+    }
 }
