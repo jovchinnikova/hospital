@@ -2,7 +2,6 @@ package com.solvd.hospital.persistence;
 
 import com.solvd.hospital.domain.exception.ConnectionException;
 
-import javax.naming.CommunicationException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -48,7 +47,7 @@ public class ConnectionPool {
         try {
             connection = DriverManager.getConnection(Config.getURL(),Config.getUSER(),Config.getPASSWORD());
         } catch (SQLException e) {
-            throw new ConnectionException("Can't create connection");
+            throw new ConnectionException("Can't create connection. " + e.getMessage());
         }
         return connection;
     }

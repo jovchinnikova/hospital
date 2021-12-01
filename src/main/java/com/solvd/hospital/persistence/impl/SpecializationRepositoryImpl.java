@@ -1,12 +1,14 @@
 package com.solvd.hospital.persistence.impl;
 
 import com.solvd.hospital.domain.Specialization;
-import com.solvd.hospital.domain.exception.CreateException;
-import com.solvd.hospital.domain.exception.SelectException;
+import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.SpecializationRepository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class SpecializationRepositoryImpl implements SpecializationRepository {
 
@@ -19,35 +21,63 @@ public class SpecializationRepositoryImpl implements SpecializationRepository {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, specialization.getName());
-            preparedStatement.setBigDecimal(2,specialization.getSalary());
+            preparedStatement.setBigDecimal(2, specialization.getSalary());
 
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 specialization.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new CreateException("Can't create specialization");
+            throw new ProcessingException("Can't create specialization " + e.getMessage());
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }
     }
 
-    public void selectAll(){
+    @Override
+    public List<Specialization> getAll() {
         Connection connection = CONNECTION_POOL.getConnection();
         String select = "select * from specializations";
+        List<Specialization> specializations = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(select);
             preparedStatement.executeQuery();
             ResultSet resultSet = preparedStatement.getResultSet();
-            while(resultSet.next()){
-                System.out.println(resultSet.getLong("id") + " " + resultSet.getString("name")
-                 + resultSet.getBigDecimal("salary"));
+            while (resultSet.next()) {
+                Specialization specialization = new Specialization();
+                specialization.setId(resultSet.getLong("id"));
+                specialization.setName(resultSet.getString("name"));
+                specialization.setSalary(resultSet.getBigDecimal("salary"));
+                specializations.add(specialization);
             }
         } catch (SQLException e) {
-            throw new SelectException("Can't select");
+            throw new ProcessingException("Can't select specializations " + e.getMessage());
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }
+        return specializations;
+    }
+
+    @Override
+    public Optional<Specialization> getByName(String name) {
+        Specialization result = null;
+
+        Connection connection = CONNECTION_POOL.getConnection();
+        String selectByName = "select * from specializations where name = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(selectByName);
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                result = new Specialization();
+                result.setId(resultSet.getLong("id"));
+            }
+        } catch (SQLException e) {
+            throw new ProcessingException("Can't select specialization by name " + e.getMessage());
+        } finally {
+            CONNECTION_POOL.releaseConnection(connection);
+        }
+        return Optional.ofNullable(result);
     }
 }

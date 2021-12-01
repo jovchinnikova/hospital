@@ -2,25 +2,24 @@ package com.solvd.hospital.service.impl;
 
 import com.solvd.hospital.domain.Equipment;
 import com.solvd.hospital.persistence.EquipmentRepository;
-import com.solvd.hospital.persistence.EquipmentSuppliersRepository;
-import com.solvd.hospital.persistence.SupplierRepository;
+import com.solvd.hospital.persistence.impl.EquipmentRepositoryImpl;
 import com.solvd.hospital.service.EquipmentService;
+import com.solvd.hospital.service.EquipmentSuppliersService;
 
 public class EquipmentServiceImpl implements EquipmentService {
 
-    private EquipmentRepository equipmentRepository;
-    private SupplierRepository supplierRepository;
-    private EquipmentSuppliersRepository equipmentSuppliersRepository;
+    private final EquipmentRepository equipmentRepository = new EquipmentRepositoryImpl();
+    private final EquipmentSuppliersService equipmentSuppliersService = new EquipmentSuppliersServiceImpl();
 
     @Override
-    public void create(Equipment equipment) {
-        equipment.setId(null);
+    public Equipment createOrGet(Equipment equipment) {
+        return equipmentRepository.getByName(equipment.getName())
+                .orElseGet(() -> create(equipment));
+    }
 
-        if(equipment.getSuppliers() != null){
-            equipment.getSuppliers().stream()
-                    .peek(supplier -> supplierRepository.create(supplier))
-                    .forEach(supplier -> equipmentSuppliersRepository.create(equipment.getId(),supplier.getId()));
-            equipmentRepository.create(equipment);
-        }
+    private Equipment create(Equipment equipment) {
+        equipment.setId(null);
+        equipmentSuppliersService.create(equipment);
+        return equipment;
     }
 }

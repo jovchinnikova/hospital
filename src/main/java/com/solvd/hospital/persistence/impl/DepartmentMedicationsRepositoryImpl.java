@@ -1,7 +1,7 @@
 package com.solvd.hospital.persistence.impl;
 
 import com.solvd.hospital.domain.Medication;
-import com.solvd.hospital.domain.exception.CreateException;
+import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.DepartmentMedicationsRepository;
 
@@ -19,12 +19,12 @@ public class DepartmentMedicationsRepositoryImpl implements DepartmentMedication
         String insert = "insert into Department_medications (department_id, medication_id, quantity) values (?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
-            preparedStatement.setLong(1,departmentId);
-            preparedStatement.setLong(2,medication.getId());
-            preparedStatement.setInt(3,medication.getQuantity());
+            preparedStatement.setLong(1, departmentId);
+            preparedStatement.setLong(2, medication.getId());
+            preparedStatement.setInt(3, medication.getQuantity());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new CreateException("Can't create medications for department");
+            throw new ProcessingException("Can't create medications for department " + e.getMessage());
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }

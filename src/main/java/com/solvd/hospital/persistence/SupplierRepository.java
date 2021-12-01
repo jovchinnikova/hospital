@@ -2,13 +2,19 @@ package com.solvd.hospital.persistence;
 
 import com.solvd.hospital.domain.Supplier;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface SupplierRepository {
 
     void create(Supplier supplier);
 
-    void selectAll();
+    List<Supplier> getAll();
 
     void update();
 
     void delete();
+
+    Optional<Supplier> getByName(String name);
+
 }

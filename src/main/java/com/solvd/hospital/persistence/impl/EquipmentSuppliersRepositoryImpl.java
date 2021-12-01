@@ -1,6 +1,6 @@
 package com.solvd.hospital.persistence.impl;
 
-import com.solvd.hospital.domain.exception.CreateException;
+import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.EquipmentSuppliersRepository;
 
@@ -20,12 +20,10 @@ public class EquipmentSuppliersRepositoryImpl implements EquipmentSuppliersRepos
             preparedStatement.setLong(2, supplierId);
             preparedStatement.executeUpdate();
 
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-
         } catch (SQLException e) {
-            throw new CreateException("Can't create suppliers for equipment");
+            throw new ProcessingException("Can't create suppliers for equipment " + e.getMessage());
         } finally {
-                CONNECTION_POOL.releaseConnection(connection);
+            CONNECTION_POOL.releaseConnection(connection);
         }
     }
 }

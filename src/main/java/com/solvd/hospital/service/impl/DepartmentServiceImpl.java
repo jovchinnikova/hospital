@@ -4,42 +4,46 @@ import com.solvd.hospital.domain.Department;
 import com.solvd.hospital.persistence.DepartmentEquipmentsRepository;
 import com.solvd.hospital.persistence.DepartmentMedicationsRepository;
 import com.solvd.hospital.persistence.DepartmentRepository;
+import com.solvd.hospital.persistence.impl.DepartmentEquipmentsRepositoryImpl;
+import com.solvd.hospital.persistence.impl.DepartmentMedicationsRepositoryImpl;
+import com.solvd.hospital.persistence.impl.DepartmentRepositoryImpl;
 import com.solvd.hospital.service.*;
 
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private DepartmentRepository departmentRepository;
-    private EquipmentService equipmentService;
-    private MedicationService medicationService;
-    private DepartmentEquipmentsRepository departmentEquipmentsRepository;
-    private DepartmentMedicationsRepository departmentMedicationsRepository;
-    private EmployeeService employeeService;
-    private WardService wardService;
+    private final DepartmentRepository departmentRepository = new DepartmentRepositoryImpl();
+    private final EquipmentService equipmentService = new EquipmentServiceImpl();
+    private final DepartmentEquipmentsRepository departmentEquipmentsRepository = new DepartmentEquipmentsRepositoryImpl();
+    private final DepartmentMedicationsRepository departmentMedicationsRepository = new DepartmentMedicationsRepositoryImpl();
+    private final EmployeeService employeeService = new EmployeeServiceImpl();
+    private final WardService wardService = new WardServiceImpl();
+    private final MedicationService medicationService = new MedicationServiceImpl();
 
     @Override
     public void create(Department department, Long hospitalId) {
-        department.setId(null);
-        if(department.getDepartmentHead() != null){
+        if (department.getDepartmentHead() != null) {
             employeeService.createHead(department.getDepartmentHead());
         }
-        if(department.getEquipments() != null){
+        department.setId(null);
+        departmentRepository.create(department, department.getDepartmentHead().getId(), hospitalId);
+
+        if (department.getEquipments() != null) {
             department.getEquipments().stream()
-                    .peek(equipment -> equipmentService.create(equipment))
-                    .forEach(equipment -> departmentEquipmentsRepository.create(equipment,department.getId()));
+                    .map(equipment -> equipmentService.createOrGet(equipment))
+                    .forEach(equipment -> departmentEquipmentsRepository.create(equipment, department.getId()));
         }
-        if(department.getMedications() != null){
+        if (department.getMedications() != null) {
             department.getMedications().stream()
-                    .peek(medication -> medicationService.create(medication))
-                    .forEach(medication -> departmentMedicationsRepository.create(medication,department.getId()));
+                    .map(medication -> medicationService.createOrGet(medication))
+                    .forEach(medication -> departmentMedicationsRepository.create(medication, department.getId()));
         }
-        if(department.getEmployees() != null){
+        if (department.getEmployees() != null) {
             department.getEmployees().stream()
-                    .forEach(employee -> employeeService.create(employee,department.getId()));
+                    .forEach(employee -> employeeService.create(employee, department.getId()));
         }
-        if(department.getWards() != null){
+        if (department.getWards() != null) {
             department.getWards().stream()
-                    .forEach(ward -> wardService.create(ward,department.getId()));
+                    .forEach(ward -> wardService.create(ward, department.getId()));
         }
-        departmentRepository.create(department,department.getDepartmentHead().getId(), hospitalId);
     }
 }

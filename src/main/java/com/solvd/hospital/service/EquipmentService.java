@@ -4,5 +4,6 @@ import com.solvd.hospital.domain.Equipment;
 
 public interface EquipmentService {
 
-    void create(Equipment equipment);
+    Equipment createOrGet(Equipment equipment);
+
 }

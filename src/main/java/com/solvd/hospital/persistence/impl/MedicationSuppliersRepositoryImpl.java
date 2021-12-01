@@ -1,6 +1,6 @@
 package com.solvd.hospital.persistence.impl;
 
-import com.solvd.hospital.domain.exception.CreateException;
+import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.MedicationSuppliersRepository;
 
@@ -18,11 +18,11 @@ public class MedicationSuppliersRepositoryImpl implements MedicationSuppliersRep
         String insert = "insert into Medication_suppliers (medication_id, supplier_id) values (?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
-            preparedStatement.setLong(1,medicationId);
-            preparedStatement.setLong(2,supplierId);
+            preparedStatement.setLong(1, medicationId);
+            preparedStatement.setLong(2, supplierId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new CreateException("Can't create suppliers for medication");
+            throw new ProcessingException("Can't create suppliers for medication " + e.getMessage());
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }

@@ -26,7 +26,7 @@ public abstract class Person {
         return lastName;
     }
 
-    public void setLastName(String LastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 }

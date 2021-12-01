@@ -4,5 +4,5 @@ import com.solvd.hospital.domain.Medication;
 
 public interface MedicationService {
 
-    void create(Medication medication);
+    Medication createOrGet(Medication medication);
 }

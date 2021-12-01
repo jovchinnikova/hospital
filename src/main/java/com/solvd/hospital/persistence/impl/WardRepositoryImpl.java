@@ -1,7 +1,7 @@
 package com.solvd.hospital.persistence.impl;
 
 import com.solvd.hospital.domain.Ward;
-import com.solvd.hospital.domain.exception.CreateException;
+import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.WardRepository;
 
@@ -17,17 +17,17 @@ public class WardRepositoryImpl implements WardRepository {
         String insert = "insert into Wards (number,floor,department_id) values (?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setInt(1,ward.getNumber());
-            preparedStatement.setInt(2,ward.getFloor());
-            preparedStatement.setLong(3,departmentId);
+            preparedStatement.setInt(1, ward.getNumber());
+            preparedStatement.setInt(2, ward.getFloor());
+            preparedStatement.setLong(3, departmentId);
             preparedStatement.executeUpdate();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 ward.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new CreateException("Can't create ward");
+            throw new ProcessingException("Can't create ward " + e.getMessage());
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }

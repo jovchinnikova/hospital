@@ -1,7 +1,7 @@
 package com.solvd.hospital.persistence.impl;
 
 import com.solvd.hospital.domain.Patient;
-import com.solvd.hospital.domain.exception.CreateException;
+import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.PatientRepository;
 
@@ -17,18 +17,18 @@ public class PatientRepositoryImpl implements PatientRepository {
         String insert = "insert into Patients (first_name, last_name, age, ward_id) values (?,?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1,patient.getFirstName());
+            preparedStatement.setString(1, patient.getFirstName());
             preparedStatement.setString(2, patient.getLastName());
-            preparedStatement.setInt(3,patient.getAge());
-            preparedStatement.setLong(4,wardId);
+            preparedStatement.setInt(3, patient.getAge());
+            preparedStatement.setLong(4, wardId);
             preparedStatement.executeUpdate();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 patient.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new CreateException("Can't create patient");
+            throw new ProcessingException("Can't create patient " + e.getMessage());
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }

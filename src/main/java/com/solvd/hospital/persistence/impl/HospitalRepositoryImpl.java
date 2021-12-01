@@ -1,7 +1,7 @@
 package com.solvd.hospital.persistence.impl;
 
 import com.solvd.hospital.domain.Hospital;
-import com.solvd.hospital.domain.exception.CreateException;
+import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.HospitalRepository;
 
@@ -18,17 +18,17 @@ public class HospitalRepositoryImpl implements HospitalRepository {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, hospital.getTitle());
-            preparedStatement.setLong(2,chiefDoctorId);
-            preparedStatement.setLong(3,addressId);
-            preparedStatement.setInt(4,hospital.getPhoneNumber());
+            preparedStatement.setLong(2, chiefDoctorId);
+            preparedStatement.setLong(3, addressId);
+            preparedStatement.setInt(4, hospital.getPhoneNumber());
             preparedStatement.executeUpdate();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 hospital.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new CreateException("Can't create hospital");
+            throw new ProcessingException("Can't create hospital " + e.getMessage());
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }

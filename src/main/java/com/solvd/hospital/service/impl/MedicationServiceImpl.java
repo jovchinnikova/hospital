@@ -2,24 +2,24 @@ package com.solvd.hospital.service.impl;
 
 import com.solvd.hospital.domain.Medication;
 import com.solvd.hospital.persistence.MedicationRepository;
-import com.solvd.hospital.persistence.MedicationSuppliersRepository;
-import com.solvd.hospital.persistence.SupplierRepository;
+import com.solvd.hospital.persistence.impl.MedicationRepositoryImpl;
 import com.solvd.hospital.service.MedicationService;
+import com.solvd.hospital.service.MedicationSuppliersService;
 
 public class MedicationServiceImpl implements MedicationService {
 
-    private MedicationRepository medicationRepository;
-    private SupplierRepository supplierRepository;
-    private MedicationSuppliersRepository medicationSuppliersRepository;
+    private final MedicationRepository medicationRepository = new MedicationRepositoryImpl();
+    private final MedicationSuppliersService medicationSuppliersService = new MedicationSuppliersServiceImpl();
 
     @Override
-    public void create(Medication medication) {
+    public Medication createOrGet(Medication medication) {
+        return medicationRepository.getByName(medication.getName())
+                .orElseGet(() -> create(medication));
+    }
+
+    private Medication create(Medication medication) {
         medication.setId(null);
-        if(medication.getSuppliers() != null){
-            medication.getSuppliers().stream()
-                    .peek(supplier -> supplierRepository.create(supplier))
-                    .forEach(supplier -> medicationSuppliersRepository.create(medication.getId(),supplier.getId()));
-            medicationRepository.create(medication);
-        }
+        medicationSuppliersService.create(medication);
+        return medication;
     }
 }

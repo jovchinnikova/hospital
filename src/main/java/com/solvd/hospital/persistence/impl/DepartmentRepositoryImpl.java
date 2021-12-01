@@ -1,7 +1,7 @@
 package com.solvd.hospital.persistence.impl;
 
 import com.solvd.hospital.domain.Department;
-import com.solvd.hospital.domain.exception.CreateException;
+import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.DepartmentRepository;
 
@@ -17,17 +17,17 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
         String insert = "insert into Departments (title, department_head_id, hospital_id) values (?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1,department.getTitle());
-            preparedStatement.setLong(2,departmentHeadId);
-            preparedStatement.setLong(3,hospitalId);
+            preparedStatement.setString(1, department.getTitle());
+            preparedStatement.setLong(2, departmentHeadId);
+            preparedStatement.setLong(3, hospitalId);
             preparedStatement.executeUpdate();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 department.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new CreateException("Can't create department");
+            throw new ProcessingException("Can't create department " + e.getMessage());
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }

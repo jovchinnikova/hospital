@@ -1,7 +1,7 @@
 package com.solvd.hospital.persistence.impl;
 
 import com.solvd.hospital.domain.Address;
-import com.solvd.hospital.domain.exception.CreateException;
+import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.AddressRepository;
 import com.solvd.hospital.persistence.ConnectionPool;
 
@@ -17,17 +17,17 @@ public class AddressRepositoryImpl implements AddressRepository {
         String insert = "insert into Addresses (city,street,building_number) values (?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1,address.getCity());
+            preparedStatement.setString(1, address.getCity());
             preparedStatement.setString(2, address.getStreet());
-            preparedStatement.setString(3,address.getBuildingNumber());
+            preparedStatement.setString(3, address.getBuildingNumber());
             preparedStatement.executeUpdate();
 
-            ResultSet resultSet  = preparedStatement.getGeneratedKeys();
-            while(resultSet.next()){
-                address.setId(resultSet.getLong("id"));
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            while (resultSet.next()) {
+                address.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new CreateException("Can't create address");
+            throw new ProcessingException("Can't create address  " + e.getMessage());
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }
