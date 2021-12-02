@@ -1,5 +1,6 @@
 package com.solvd.hospital.persistence.impl;
 
+import com.solvd.hospital.domain.Patient;
 import com.solvd.hospital.domain.Ward;
 import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;

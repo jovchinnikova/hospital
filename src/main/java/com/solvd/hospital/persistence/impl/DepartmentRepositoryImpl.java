@@ -1,7 +1,6 @@
 package com.solvd.hospital.persistence.impl;
 
 import com.solvd.hospital.domain.Department;
-import com.solvd.hospital.domain.Employee;
 import com.solvd.hospital.domain.exception.ProcessingException;
 import com.solvd.hospital.persistence.ConnectionPool;
 import com.solvd.hospital.persistence.DepartmentRepository;
@@ -52,7 +51,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
                 Department department = new Department();
                 department.setId(resultSet.getLong("id"));
                 department.setTitle(resultSet.getString("title"));
-                department.setDepartmentHead(new Employee());
                 department.setWards(wardService.getById(department.getId()));
                 departments.add(department);
             }

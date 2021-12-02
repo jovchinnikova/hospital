@@ -23,7 +23,7 @@ public class Config {
 
     private static void loadProperties() throws IOException {
         Properties properties = new Properties();
-        File file = new File("D:\\Git\\git\\hospital\\src\\main\\resources\\config.properties");
+        File file = new File("src/main/resources/config.properties");
         FileReader reader = new FileReader(file);
         properties.load(reader);
         URL = properties.getProperty("url");

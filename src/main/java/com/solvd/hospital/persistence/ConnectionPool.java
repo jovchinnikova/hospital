@@ -42,7 +42,7 @@ public class ConnectionPool {
         return instance;
     }
 
-    public static Connection createConnection(){
+    private static Connection createConnection(){
         Connection connection;
         try {
             connection = DriverManager.getConnection(Config.getURL(),Config.getUSER(),Config.getPASSWORD());

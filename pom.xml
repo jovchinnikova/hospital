@@ -11,6 +11,7 @@
 
     <properties>
         <log4jVersion>2.14.1</log4jVersion>
+        <mySQLVersion>8.0.27</mySQLVersion>
     </properties>
 
     <dependencies>
@@ -27,7 +28,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.27</version>
+            <version>${mySQLVersion}</version>
         </dependency>
     </dependencies>
 
