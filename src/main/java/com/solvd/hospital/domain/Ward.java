@@ -1,6 +1,7 @@
-package com.solvd.hospital;
+package com.solvd.hospital.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Ward {
 
@@ -39,5 +40,28 @@ public class Ward {
 
     public void setPatients(List<Patient> patients) {
         this.patients = patients;
+    }
+
+    @Override
+    public String toString() {
+        return "Ward{" +
+                " id=" + id +
+                ", number=" + number +
+                ", floor=" + floor +
+                ", patients=" + patients +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ward ward = (Ward) o;
+        return id.equals(ward.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

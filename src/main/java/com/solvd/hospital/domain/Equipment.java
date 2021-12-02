@@ -1,6 +1,7 @@
-package com.solvd.hospital;
+package com.solvd.hospital.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Equipment {
 
@@ -8,7 +9,7 @@ public class Equipment {
     private String name;
     private BigDecimal price;
     private int quantity;
-    private Supplier supplier;
+    private List<Supplier> suppliers;
 
     public Long getId() {
         return id;
@@ -42,11 +43,11 @@ public class Equipment {
         this.quantity = quantity;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public List<Supplier> getSuppliers() {
+        return suppliers;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    public void setSuppliers(List<Supplier> suppliers) {
+        this.suppliers = suppliers;
     }
 }
