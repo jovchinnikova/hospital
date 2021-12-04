@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.hospital.persistence.EmployeeRepository">
+    <insert id="createHead" keyProperty="employee.id" useGeneratedKeys="true">
+        insert into Employees (first_name, last_name, specialization_id, position)
+        values (#{employee.firstName},#{employee.lastName},#{specializationId},#{employee.position})
+    </insert>
+    <insert id="create" keyProperty="employee.id" useGeneratedKeys="true">
+        insert into Employees (first_name,last_name,specialization_id,department_id,qualification)
+        values (#{employee.firstName},#{employee.lastName},#{specializationId},#{departmentId},#{employee.qualification})
+    </insert>
+</mapper>

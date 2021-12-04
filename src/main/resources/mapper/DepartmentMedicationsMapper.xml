@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.hospital.persistence.DepartmentMedicationsRepository">
+    <insert id="create">
+        insert into Department_medications (department_id, medication_id, quantity) values (#{departmentId}, #{medication.id},
+        #{medication.quantity})
+    </insert>
+</mapper>

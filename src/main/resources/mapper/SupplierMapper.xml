@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.hospital.persistence.SupplierRepository">
+    <insert id="create" keyProperty="id" useGeneratedKeys="true">
+        insert into Suppliers (name,country) values(#{name},#{country})
+    </insert>
+
+    <select id="getByName" resultMap="SupplierResultMap">
+        select id from suppliers where name = #{name}
+    </select>
+    <resultMap id="SupplierResultMap" type="com.solvd.hospital.domain.Supplier" autoMapping="false">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <update id="update">
+        update suppliers set country = #{country} where name = #{supplier.name}
+    </update>
+
+    <delete id="delete">
+        delete from suppliers where name = #{name}
+    </delete>
+</mapper>

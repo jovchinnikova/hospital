@@ -3,7 +3,9 @@ package com.solvd.hospital.service.impl;
 import com.solvd.hospital.domain.Hospital;
 import com.solvd.hospital.persistence.AddressRepository;
 import com.solvd.hospital.persistence.HospitalRepository;
+import com.solvd.hospital.persistence.impl.AddressMapperImpl;
 import com.solvd.hospital.persistence.impl.AddressRepositoryImpl;
+import com.solvd.hospital.persistence.impl.HospitalMapperImpl;
 import com.solvd.hospital.persistence.impl.HospitalRepositoryImpl;
 import com.solvd.hospital.service.DepartmentService;
 import com.solvd.hospital.service.EmployeeService;
@@ -11,10 +13,10 @@ import com.solvd.hospital.service.HospitalService;
 
 public class HospitalServiceImpl implements HospitalService {
 
-    private final AddressRepository addressesRepository = new AddressRepositoryImpl();
+    private final AddressRepository addressesRepository = new AddressMapperImpl();
     private final EmployeeService employeeService = new EmployeeServiceImpl();
     private final DepartmentService departmentService = new DepartmentServiceImpl();
-    private final HospitalRepository hospitalRepository = new HospitalRepositoryImpl();
+    private final HospitalRepository hospitalRepository = new HospitalMapperImpl();
 
 
     @Override

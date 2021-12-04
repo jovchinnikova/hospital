@@ -37,7 +37,7 @@ public class EquipmentRepositoryImpl implements EquipmentRepository {
         Equipment result = null;
 
         Connection connection = CONNECTION_POOL.getConnection();
-        String selectByName = "select * from medications where name = ?";
+        String selectByName = "select * from equipments where name = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(selectByName);
             preparedStatement.setString(1, name);

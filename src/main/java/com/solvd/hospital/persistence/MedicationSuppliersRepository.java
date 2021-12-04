@@ -1,7 +1,9 @@
 package com.solvd.hospital.persistence;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface MedicationSuppliersRepository {
 
-    void create(Long medicationId, Long supplierId);
+    void create(@Param("medicationId") Long medicationId, @Param("supplierId") Long supplierId);
 
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.hospital.persistence.AddressRepository">
+    <insert id="create" keyProperty="id" useGeneratedKeys="true">
+        insert into Addresses (city,street,building_number) values (#{city},#{street},#{buildingNumber})
+    </insert>
+</mapper>

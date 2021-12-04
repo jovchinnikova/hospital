@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.hospital.persistence.MedicationRepository">
+    <insert id="create" keyProperty="id" useGeneratedKeys="true">
+        insert into Medications (name,form,dosage,price) values (#{name},#{form}, #{dosage},#{price})
+    </insert>
+    <select id="getByName" resultMap="MedicationResultMap">
+        select * from medications where name = #{name}
+    </select>
+    <resultMap id="MedicationResultMap" type="com.solvd.hospital.domain.Medication" autoMapping="false">
+        <id property="id" column="id"/>
+    </resultMap>
+</mapper>

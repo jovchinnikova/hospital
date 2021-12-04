@@ -2,13 +2,14 @@ package com.solvd.hospital.service.impl;
 
 import com.solvd.hospital.domain.Equipment;
 import com.solvd.hospital.persistence.EquipmentRepository;
+import com.solvd.hospital.persistence.impl.EquipmentMapperImpl;
 import com.solvd.hospital.persistence.impl.EquipmentRepositoryImpl;
 import com.solvd.hospital.service.EquipmentService;
 import com.solvd.hospital.service.EquipmentSuppliersService;
 
 public class EquipmentServiceImpl implements EquipmentService {
 
-    private final EquipmentRepository equipmentRepository = new EquipmentRepositoryImpl();
+    private final EquipmentRepository equipmentRepository = new EquipmentMapperImpl();
     private final EquipmentSuppliersService equipmentSuppliersService = new EquipmentSuppliersServiceImpl();
 
     @Override

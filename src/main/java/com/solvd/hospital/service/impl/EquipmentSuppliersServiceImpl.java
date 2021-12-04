@@ -4,7 +4,9 @@ import com.solvd.hospital.domain.Equipment;
 import com.solvd.hospital.domain.Supplier;
 import com.solvd.hospital.persistence.EquipmentRepository;
 import com.solvd.hospital.persistence.EquipmentSuppliersRepository;
+import com.solvd.hospital.persistence.impl.EquipmentMapperImpl;
 import com.solvd.hospital.persistence.impl.EquipmentRepositoryImpl;
+import com.solvd.hospital.persistence.impl.EquipmentSuppliersMapperImpl;
 import com.solvd.hospital.persistence.impl.EquipmentSuppliersRepositoryImpl;
 import com.solvd.hospital.service.EquipmentSuppliersService;
 import com.solvd.hospital.service.SupplierService;
@@ -14,8 +16,8 @@ import java.util.List;
 public class EquipmentSuppliersServiceImpl implements EquipmentSuppliersService {
 
     private final SupplierService supplierService = new SupplierServiceImpl();
-    private final EquipmentRepository equipmentRepository = new EquipmentRepositoryImpl();
-    private final EquipmentSuppliersRepository equipmentSuppliersRepository = new EquipmentSuppliersRepositoryImpl();
+    private final EquipmentRepository equipmentRepository = new EquipmentMapperImpl();
+    private final EquipmentSuppliersRepository equipmentSuppliersRepository = new EquipmentSuppliersMapperImpl();
 
     @Override
     public Equipment create(Equipment equipment) {
