@@ -7,6 +7,8 @@ import com.solvd.hospital.persistence.DepartmentRepository;
 import com.solvd.hospital.persistence.impl.*;
 import com.solvd.hospital.service.*;
 
+import java.util.List;
+
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository = new DepartmentMapperImpl();
@@ -43,5 +45,9 @@ public class DepartmentServiceImpl implements DepartmentService {
             department.getWards().stream()
                     .forEach(ward -> wardService.create(ward, department.getId()));
         }
+    }
+
+    public List<Department> retrieveAll(){
+        return departmentRepository.getAll();
     }
 }

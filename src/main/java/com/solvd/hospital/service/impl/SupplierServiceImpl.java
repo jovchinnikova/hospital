@@ -21,4 +21,13 @@ public class SupplierServiceImpl implements SupplierService {
         supplierRepository.create(supplier);
         return supplier;
     }
+
+    public void delete(String name) {
+        supplierRepository.delete(name);
+    }
+
+    public void update(Supplier supplier, String country){
+       supplierRepository.update(supplier, country);
+    }
+
 }

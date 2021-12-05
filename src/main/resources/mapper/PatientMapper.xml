@@ -10,7 +10,7 @@
     </insert>
     
     <resultMap id="PatientResultMap" type="com.solvd.hospital.domain.Patient" autoMapping="false">
-        <id property="id" column="id"/>
+        <id property="id" column="patient_id"/>
         <result property="firstName" column="first_name"/>
         <result property="lastName" column="last_name"/>
         <result property="age" column="age"/>

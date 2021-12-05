@@ -1,14 +1,12 @@
 package com.solvd.hospital;
 
 import com.solvd.hospital.domain.*;
-import com.solvd.hospital.persistence.DepartmentRepository;
-import com.solvd.hospital.persistence.SupplierRepository;
-import com.solvd.hospital.persistence.impl.DepartmentMapperImpl;
-import com.solvd.hospital.persistence.impl.DepartmentRepositoryImpl;
-import com.solvd.hospital.persistence.impl.SupplierMapperImpl;
-import com.solvd.hospital.persistence.impl.SupplierRepositoryImpl;
+import com.solvd.hospital.service.DepartmentService;
 import com.solvd.hospital.service.HospitalService;
+import com.solvd.hospital.service.SupplierService;
+import com.solvd.hospital.service.impl.DepartmentServiceImpl;
 import com.solvd.hospital.service.impl.HospitalServiceImpl;
+import com.solvd.hospital.service.impl.SupplierServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -161,12 +159,12 @@ public class Main {
         HospitalService hospitalService = new HospitalServiceImpl();
         hospitalService.create(hospital);
 
-        SupplierRepository supplierRepository = new SupplierMapperImpl();
-        supplierRepository.delete(supplier1.getName());
-        supplierRepository.update(supplier2,"China");
+        SupplierService supplierService = new SupplierServiceImpl();
+        supplierService.delete(supplier1.getName());
+        supplierService.update(supplier2,"China");
 
-        DepartmentRepository departmentRepository = new DepartmentMapperImpl();
-        List<Department> result = departmentRepository.getAll();
+        DepartmentService departmentService = new DepartmentServiceImpl();
+        List<Department> result = departmentService.retrieveAll();
         System.out.println(result);
     }
 }
