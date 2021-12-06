@@ -2,12 +2,13 @@ package com.solvd.hospital.service.impl;
 
 import com.solvd.hospital.domain.Specialization;
 import com.solvd.hospital.persistence.SpecializationRepository;
+import com.solvd.hospital.persistence.impl.SpecializationMapperImpl;
 import com.solvd.hospital.persistence.impl.SpecializationRepositoryImpl;
 import com.solvd.hospital.service.SpecializationService;
 
 public class SpecializationServiceImpl implements SpecializationService {
 
-    private final SpecializationRepository specializationRepository = new SpecializationRepositoryImpl();
+    private final SpecializationRepository specializationRepository = new SpecializationMapperImpl();
 
     @Override
     public Specialization createOrGet(Specialization specialization) {

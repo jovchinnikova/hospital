@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.hospital.persistence.EquipmentRepository">
+    <insert id="create" keyProperty="id" useGeneratedKeys="true">
+        insert into Equipments (name,price) values (#{name},#{price})
+    </insert>
+
+    <select id="getByName" resultMap="EquipmentResultMap">
+        select * from equipments where name = #{name}
+    </select>
+    <resultMap id="EquipmentResultMap" type="com.solvd.hospital.domain.Equipment" autoMapping="false">
+        <id property="id" column="id"/>
+    </resultMap>
+</mapper>

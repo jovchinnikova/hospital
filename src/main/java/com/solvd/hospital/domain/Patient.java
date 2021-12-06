@@ -24,6 +24,7 @@ public class Patient extends Person {
     @Override
     public String toString() {
         return "Patient{" +
+                " id: " + super.getId() +
                 " first name: " + super.getFirstName() +
                 ", last name: " + super.getLastName() +
                 ", age=" + age +

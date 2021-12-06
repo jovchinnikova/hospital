@@ -4,7 +4,9 @@ import com.solvd.hospital.domain.Medication;
 import com.solvd.hospital.domain.Supplier;
 import com.solvd.hospital.persistence.MedicationRepository;
 import com.solvd.hospital.persistence.MedicationSuppliersRepository;
+import com.solvd.hospital.persistence.impl.MedicationMapperImpl;
 import com.solvd.hospital.persistence.impl.MedicationRepositoryImpl;
+import com.solvd.hospital.persistence.impl.MedicationSuppliersMapperImpl;
 import com.solvd.hospital.persistence.impl.MedicationSuppliersRepositoryImpl;
 import com.solvd.hospital.service.MedicationSuppliersService;
 import com.solvd.hospital.service.SupplierService;
@@ -13,9 +15,9 @@ import java.util.List;
 
 public class MedicationSuppliersServiceImpl implements MedicationSuppliersService {
 
-    private final MedicationRepository medicationRepository = new MedicationRepositoryImpl();
+    private final MedicationRepository medicationRepository = new MedicationMapperImpl();
     private final SupplierService supplierService = new SupplierServiceImpl();
-    private final MedicationSuppliersRepository medicationSuppliersRepository = new MedicationSuppliersRepositoryImpl();
+    private final MedicationSuppliersRepository medicationSuppliersRepository = new MedicationSuppliersMapperImpl();
 
     @Override
     public Medication create(Medication medication) {

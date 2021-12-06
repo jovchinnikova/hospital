@@ -3,13 +3,14 @@ package com.solvd.hospital.service.impl;
 import com.solvd.hospital.domain.Employee;
 import com.solvd.hospital.domain.Specialization;
 import com.solvd.hospital.persistence.EmployeeRepository;
+import com.solvd.hospital.persistence.impl.EmployeeMapperImpl;
 import com.solvd.hospital.persistence.impl.EmployeeRepositoryImpl;
 import com.solvd.hospital.service.EmployeeService;
 import com.solvd.hospital.service.SpecializationService;
 
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final EmployeeRepository employeeRepository = new EmployeeRepositoryImpl();
+    private final EmployeeRepository employeeRepository = new EmployeeMapperImpl();
     private final SpecializationService specializationService = new SpecializationServiceImpl();
 
     @Override

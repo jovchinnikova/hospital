@@ -3,7 +3,9 @@ package com.solvd.hospital.service.impl;
 import com.solvd.hospital.domain.Ward;
 import com.solvd.hospital.persistence.PatientRepository;
 import com.solvd.hospital.persistence.WardRepository;
+import com.solvd.hospital.persistence.impl.PatientMapperImpl;
 import com.solvd.hospital.persistence.impl.PatientRepositoryImpl;
+import com.solvd.hospital.persistence.impl.WardMapperImpl;
 import com.solvd.hospital.persistence.impl.WardRepositoryImpl;
 import com.solvd.hospital.service.WardService;
 
@@ -13,8 +15,8 @@ import java.util.stream.Collectors;
 
 public class WardServiceImpl implements WardService {
 
-    private final WardRepository wardRepository = new WardRepositoryImpl();
-    private final PatientRepository patientRepository = new PatientRepositoryImpl();
+    private final WardRepository wardRepository = new WardMapperImpl();
+    private final PatientRepository patientRepository = new PatientMapperImpl();
 
     @Override
     public void create(Ward ward, Long departmentId) {

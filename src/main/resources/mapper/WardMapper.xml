@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.hospital.persistence.WardRepository">
+    <insert id="create" keyProperty="ward.id" useGeneratedKeys="true">
+        insert into Wards (number,floor,department_id) values (#{ward.number}, #{ward.floor}, #{departmentId})
+    </insert>
+
+    <resultMap id="WardResultMap" type="com.solvd.hospital.domain.Ward" autoMapping="false">
+        <id property="id" column="ward_id"/>
+        <result property="number" column="number"/>
+        <result property="floor" column="floor"/>
+        <collection property="patients" javaType="ArrayList" resultMap="com.solvd.hospital.persistence.PatientRepository.PatientResultMap"/>
+    </resultMap>
+</mapper>

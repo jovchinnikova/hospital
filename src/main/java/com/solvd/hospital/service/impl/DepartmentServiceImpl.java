@@ -4,17 +4,17 @@ import com.solvd.hospital.domain.Department;
 import com.solvd.hospital.persistence.DepartmentEquipmentsRepository;
 import com.solvd.hospital.persistence.DepartmentMedicationsRepository;
 import com.solvd.hospital.persistence.DepartmentRepository;
-import com.solvd.hospital.persistence.impl.DepartmentEquipmentsRepositoryImpl;
-import com.solvd.hospital.persistence.impl.DepartmentMedicationsRepositoryImpl;
-import com.solvd.hospital.persistence.impl.DepartmentRepositoryImpl;
+import com.solvd.hospital.persistence.impl.*;
 import com.solvd.hospital.service.*;
+
+import java.util.List;
 
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private final DepartmentRepository departmentRepository = new DepartmentRepositoryImpl();
+    private final DepartmentRepository departmentRepository = new DepartmentMapperImpl();
     private final EquipmentService equipmentService = new EquipmentServiceImpl();
-    private final DepartmentEquipmentsRepository departmentEquipmentsRepository = new DepartmentEquipmentsRepositoryImpl();
-    private final DepartmentMedicationsRepository departmentMedicationsRepository = new DepartmentMedicationsRepositoryImpl();
+    private final DepartmentEquipmentsRepository departmentEquipmentsRepository = new DepartmentEquipmentsMapperImpl();
+    private final DepartmentMedicationsRepository departmentMedicationsRepository = new DepartmentMedicationsMapperImpl();
     private final EmployeeService employeeService = new EmployeeServiceImpl();
     private final WardService wardService = new WardServiceImpl();
     private final MedicationService medicationService = new MedicationServiceImpl();
@@ -45,5 +45,9 @@ public class DepartmentServiceImpl implements DepartmentService {
             department.getWards().stream()
                     .forEach(ward -> wardService.create(ward, department.getId()));
         }
+    }
+
+    public List<Department> retrieveAll(){
+        return departmentRepository.getAll();
     }
 }
